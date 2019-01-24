@@ -1,6 +1,5 @@
 var swDisplay = document.getElementById("swDisplay");
-var swStartBtn = document.getElementById("swStart");
-var swStopBtn  = document.getElementById("swStop");
+var swStartStopBtn = document.getElementById("swStartStop");
 var swResetBtn = document.getElementById("swReset");
 
 var swAmount = 0;
@@ -82,6 +81,16 @@ function swFormatTime(){
     return display;
 }
 
-swStartBtn.addEventListener("click", swStart);
-swStopBtn.addEventListener("click", swStop);
+function swStartOrStop(){
+    if(swRunning){
+        swStop();
+        swStartStopBtn.textContent = "Start";
+    }
+    else{
+        swStart();
+        swStartStopBtn.textContent = "Stop";
+    }
+}
+
+swStartStopBtn.addEventListener("click", swStartOrStop);
 swResetBtn.addEventListener("click", swReset);
