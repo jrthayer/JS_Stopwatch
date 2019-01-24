@@ -5,6 +5,7 @@ var swLapBtn   = document.getElementById("swLapBtn");
 var swLaps = document.getElementById("swLaps");
 var swLapsUpBtn = document.getElementById("swLapsUp");
 var swLapsDownBtn = document.getElementById("swLapsDown");
+var swLapsPanel = document.getElementById("swLapsPanel");
 
 var swAmount = 0;
 var swTimes = [0,0,0,0];
@@ -13,7 +14,7 @@ var swTimeout = null;
 var swRunning = false;
 var swDisplayTxt = "00:00:00:000";
 var lapPage = 0;
-var lapPerPage = 5;
+var lapPerPage = 3;
 
 //used when to start or continue sw
 function swStart(){
@@ -50,10 +51,12 @@ function swReset(){
     //reset laps
     swClearChildren(swLaps);
     swLapsUpBtn.classList.remove("show");
-    swLapsUpBtn.classList.add("remove");
+    swLapsUpBtn.classList.add("hide");
     swLapsDownBtn.classList.remove("show");
-    swLapsDownBtn.classList.add("remove");
+    swLapsDownBtn.classList.add("hide");
     lapPage = 0;
+    swLapsPanel.classList.remove("add");
+    swLapsPanel.classList.add("remove");
 }
 
 //sets and increments stopwatch value
@@ -115,10 +118,14 @@ function swLap(){
     var lap = document.createElement("li");
     lap.textContent = swDisplayTxt;
     lap.classList.add("swLap");
+    if(swLapsPanel.classList.contains("remove")){
+        swLapsPanel.classList.remove("remove");
+        swLapsPanel.classList.add("add");
+    }
     if(swLaps.childElementCount >= lapPage * lapPerPage + lapPerPage){
         lap.classList.add("remove");
-        if(swLapsDown.classList.contains("remove")){
-            swLapsDown.classList.remove("remove");
+        if(swLapsDown.classList.contains("hide")){
+            swLapsDown.classList.remove("hide");
             swLapsDown.classList.add("show");
         }
     }
@@ -128,27 +135,27 @@ function swLap(){
 function swDownPg(){
     var laps = swLaps.getElementsByClassName("swLap");
     for(var i = 0; i < lapPerPage; i++){
-        laps[lapPage*lapPerPage+i].classList.remove("show");
+        laps[lapPage*lapPerPage+i].classList.remove("add");
         laps[lapPage*lapPerPage+i].classList.add("remove");
     }
     lapPage++;
     for(var i = 0; i < lapPerPage; i++){
         if(lapPage*lapPerPage+i < laps.length){
             laps[lapPage*lapPerPage+i].classList.remove("remove");
-            laps[lapPage*lapPerPage+i].classList.add("show");
+            laps[lapPage*lapPerPage+i].classList.add("add");
         }
     }
 
     //add page up if not visible
-    if(swLapsUpBtn.classList.contains("remove")){
-        swLapsUpBtn.classList.remove("remove");
+    if(swLapsUpBtn.classList.contains("hide")){
+        swLapsUpBtn.classList.remove("hide");
         swLapsUpBtn.classList.add("show");
     }
 
     //remove pagedown if now on last page
     if(lapPage * lapPerPage +lapPerPage >= swLaps.childElementCount){
         swLapsDownBtn.classList.remove("show");
-        swLapsDownBtn.classList.add("remove");
+        swLapsDownBtn.classList.add("hide");
     }
 }
 
@@ -156,26 +163,26 @@ function swUpPg(){
     var laps = swLaps.getElementsByClassName("swLap");
     for(var i = 0; i < lapPerPage; i++){
         if(lapPage*lapPerPage+i < laps.length){
-            laps[lapPage*lapPerPage+i].classList.remove("show");
+            laps[lapPage*lapPerPage+i].classList.remove("add");
             laps[lapPage*lapPerPage+i].classList.add("remove");
         }
     }
     lapPage--;
     for(var i = 0; i < lapPerPage; i++){
         laps[lapPage*lapPerPage+i].classList.remove("remove");
-        laps[lapPage*lapPerPage+i].classList.add("show");
+        laps[lapPage*lapPerPage+i].classList.add("add");
     }
 
     //add page down if not visible
-    if(swLapsDownBtn.classList.contains("remove")){
-        swLapsDownBtn.classList.remove("remove");
+    if(swLapsDownBtn.classList.contains("hide")){
+        swLapsDownBtn.classList.remove("hide");
         swLapsDownBtn.classList.add("show");
     }
 
     //remove pageup if now on last page
     if(lapPage * lapPerPage === 0){
         swLapsUpBtn.classList.remove("show");
-        swLapsUpBtn.classList.add("remove");
+        swLapsUpBtn.classList.add("hide");
     }
 }
 

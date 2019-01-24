@@ -1,7 +1,101 @@
+:root{
+    --swTextColor: rgb(38, 223, 38);
+    --swBackground: #000000;
+    --swFontSize: 35px;
+}
+
+html, body {
+    background: var(--swBackground);
+    height: 100%;
+    width: 100%;
+    margin: 0;
+    overflow: hidden;
+}
+
+/*timer css styling*/
+#stopwatch{
+    color: var(--swTextColor);
+    min-width: calc(var(--swFontSize)*7);
+    min-height: calc(var(--swFontSize)*6.4);
+    font-size: var(--swFontSize);
+    text-align: center;
+    position: relative;
+    float: left;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+
+}
+
+#swLaps{
+    padding: 0;
+    margin: 0;
+}
+
+#swPanel{
+    min-height: calc(var(--swFontSize)*3);
+    border: solid 2px var(--swTextColor);
+    border-top-right-radius: 20px;
+    border-top-left-radius: 20px;
+}
+
+#swLapsPanel{
+    min-height: calc(var(--swFontSize)*3.2);
+    border: solid 2px var(--swTextColor);
+    border-top: 0px;
+    border-bottom-right-radius: 20px;
+    border-bottom-left-radius: 20px;
+}
+
+#swDisplay{
+    margin-top: 4%;
+}
+
 .remove{
     display: none;
 }
 
-.show{
+.add{
     display: block;
+}
+
+.hide{
+    visibility: hidden;
+}
+
+.show{
+    visibility: show;
+}
+
+.swBtn{
+    border: none;
+    background: var(--swTextColor);
+    color: var(--swBackground);
+    text-align: center;
+    font-size: calc(var(--swFontSize)/2);
+    outline:0;
+    width: 25.33%;
+    margin: 0 4%;
+    margin-top: 8%;
+    float: left;  
+}
+
+
+.swLap{
+    text-align: center;
+    list-style-type: none;
+    font-size: calc(var(--swFontSize)/2);
+    margin: 0px;
+}
+
+.swLapBtn{
+    font-size: calc(var(--swFontSize)/4);
+    width: 38%;
+    margin: 0;
+    margin-left:31%;
+    margin-right:31%;
+}
+
+.swLapBtnTop{
+    margin-top: 5%;
 }
