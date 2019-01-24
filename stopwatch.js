@@ -3,6 +3,8 @@ var swStartStopBtn = document.getElementById("swStartStop");
 var swResetBtn = document.getElementById("swReset");
 var swLapBtn   = document.getElementById("swLapBtn");
 var swLaps = document.getElementById("swLaps");
+var swLapsUpBtn = document.getElementById("swLapsUp");
+var swLapsDownBtn = document.getElementById("swLapsDown");
 
 var swAmount = 0;
 var swTimes = [0,0,0,0];
@@ -10,6 +12,8 @@ var swMaxs = [1000, 60, 60, 24];
 var swTimeout = null;
 var swRunning = false;
 var swDisplayTxt = "00:00:00:000";
+var lapPage = 0;
+var lapPerPage = 5;
 
 //used when to start or continue sw
 function swStart(){
@@ -36,13 +40,20 @@ function swStartOrStop(){
 
 //used to reset sw
 function swReset(){
+    //reset stopwatch
     swStop();
     swStartStopBtn.textContent = "Start";
     swAmount = 0;
     swTimes = [0,0,0,0];
     swDisplayTxt = "00:00:00:000";
     swDisplay.textContent = swDisplayTxt;
+    //reset laps
     swClearChildren(swLaps);
+    swLapsUpBtn.classList.remove("show");
+    swLapsUpBtn.classList.add("remove");
+    swLapsDownBtn.classList.remove("show");
+    swLapsDownBtn.classList.add("remove");
+    lapPage = 0;
 }
 
 //sets and increments stopwatch value
@@ -103,7 +114,69 @@ function swFormatTime(){
 function swLap(){
     var lap = document.createElement("li");
     lap.textContent = swDisplayTxt;
+    lap.classList.add("swLap");
+    if(swLaps.childElementCount >= lapPage * lapPerPage + lapPerPage){
+        lap.classList.add("remove");
+        if(swLapsDown.classList.contains("remove")){
+            swLapsDown.classList.remove("remove");
+            swLapsDown.classList.add("show");
+        }
+    }
     swLaps.appendChild(lap);  
+}
+
+function swDownPg(){
+    var laps = swLaps.getElementsByClassName("swLap");
+    for(var i = 0; i < lapPerPage; i++){
+        laps[lapPage*lapPerPage+i].classList.remove("show");
+        laps[lapPage*lapPerPage+i].classList.add("remove");
+    }
+    lapPage++;
+    for(var i = 0; i < lapPerPage; i++){
+        if(lapPage*lapPerPage+i < laps.length){
+            laps[lapPage*lapPerPage+i].classList.remove("remove");
+            laps[lapPage*lapPerPage+i].classList.add("show");
+        }
+    }
+
+    //add page up if not visible
+    if(swLapsUpBtn.classList.contains("remove")){
+        swLapsUpBtn.classList.remove("remove");
+        swLapsUpBtn.classList.add("show");
+    }
+
+    //remove pagedown if now on last page
+    if(lapPage * lapPerPage +lapPerPage >= swLaps.childElementCount){
+        swLapsDownBtn.classList.remove("show");
+        swLapsDownBtn.classList.add("remove");
+    }
+}
+
+function swUpPg(){
+    var laps = swLaps.getElementsByClassName("swLap");
+    for(var i = 0; i < lapPerPage; i++){
+        if(lapPage*lapPerPage+i < laps.length){
+            laps[lapPage*lapPerPage+i].classList.remove("show");
+            laps[lapPage*lapPerPage+i].classList.add("remove");
+        }
+    }
+    lapPage--;
+    for(var i = 0; i < lapPerPage; i++){
+        laps[lapPage*lapPerPage+i].classList.remove("remove");
+        laps[lapPage*lapPerPage+i].classList.add("show");
+    }
+
+    //add page down if not visible
+    if(swLapsDownBtn.classList.contains("remove")){
+        swLapsDownBtn.classList.remove("remove");
+        swLapsDownBtn.classList.add("show");
+    }
+
+    //remove pageup if now on last page
+    if(lapPage * lapPerPage === 0){
+        swLapsUpBtn.classList.remove("show");
+        swLapsUpBtn.classList.add("remove");
+    }
 }
 
 //Removes All Laps
@@ -116,3 +189,5 @@ function swClearChildren(element){
 swStartStopBtn.addEventListener("click", swStartOrStop);
 swResetBtn.addEventListener("click", swReset);
 swLapBtn.addEventListener("click", swLap);
+swLapsDownBtn.addEventListener("click", swDownPg);
+swLapsUpBtn.addEventListener("click", swUpPg);
