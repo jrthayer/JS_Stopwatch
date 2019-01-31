@@ -24,22 +24,35 @@ html, body {
     top: 50%;
     left: 50%;
     transform: translate(-50%, -50%);
-
 }
 
-#swLaps{
+.swBtn{
+    border: none;
+    background: var(--swTextColor);
+    color: var(--swBackground);
+    text-align: center;
+    font-size: calc(var(--swFontSize)/2);
+    outline:0;
+    width: 25.33%;
+    margin: 0 4%;
+    margin-top: 8%;
+    float: left; 
+    border-radius: 5px; 
+}
+
+.swLaps{
     padding: 0;
     margin: 0;
 }
 
-#swPanel{
+.swPanel{
     min-height: calc(var(--swFontSize)*3);
     border: solid 2px var(--swTextColor);
     border-top-right-radius: 20px;
     border-top-left-radius: 20px;
 }
 
-#swLapsPanel{
+.swLapsPanel{
     min-height: calc(var(--swFontSize)*3.2);
     border: solid 2px var(--swTextColor);
     border-top: 0px;
@@ -47,7 +60,7 @@ html, body {
     border-bottom-left-radius: 20px;
 }
 
-#swDisplay{
+.swDisplay{
     margin-top: 4%;
 }
 
@@ -65,20 +78,6 @@ html, body {
 
 .show{
     visibility: show;
-}
-
-.swBtn{
-    border: none;
-    background: var(--swTextColor);
-    color: var(--swBackground);
-    text-align: center;
-    font-size: calc(var(--swFontSize)/2);
-    outline:0;
-    width: 25.33%;
-    margin: 0 4%;
-    margin-top: 8%;
-    float: left; 
-    border-radius: 5px; 
 }
 
 

@@ -1,13 +1,13 @@
 class Stopwatch{
     constructor(stopwatch){
-        this.swDisplay = document.getElementById("swDisplay");
-        this.swStartStopBtn = document.getElementById("swStartStop");
-        this.swResetBtn = document.getElementById("swReset");
-        this.swLapBtn   = document.getElementById("swLapBtn");
-        this.swLaps = document.getElementById("swLaps");
-        this.swLapsUpBtn = document.getElementById("swLapsUp");
-        this.swLapsDownBtn = document.getElementById("swLapsDown");
-        this.swLapsPanel = document.getElementById("swLapsPanel");
+        this.swDisplay = stopwatch.getElementsByClassName("swDisplay")[0];
+        this.swStartStopBtn = stopwatch.getElementsByClassName("swStartStop")[0];
+        this.swResetBtn = stopwatch.getElementsByClassName("swReset")[0];
+        this.swLapBtn   = stopwatch.getElementsByClassName("swBtn")[1];
+        this.swLaps = stopwatch.getElementsByClassName("swLaps")[0];
+        this.swLapsUpBtn = stopwatch.getElementsByClassName("swLapsUp")[0];
+        this.swLapsDownBtn = stopwatch.getElementsByClassName("swLapsDown")[0];
+        this.swLapsPanel = stopwatch.getElementsByClassName("swLapsPanel")[0];
 
         this.swAmount = 0;
         this.swTimes = [0,0,0,0];
